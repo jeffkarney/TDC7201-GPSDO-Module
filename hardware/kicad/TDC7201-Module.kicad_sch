@@ -1,0 +1,298 @@
+(kicad_sch
+  (version 20231120)
+  (generator "eeschema")
+  (generator_version "7.0")
+  (paper "A3")
+  (title_block
+    (title "TDC7201 GPSDO Precision Timing Measurement Module")
+    (date "2026-04-08")
+    (rev "1.0")
+    (company "jeffkarney")
+    (comment 1 "4-Layer PCB – JLCPCB JLC04161H-7628")
+    (comment 2 "ESP32-C3-WROOM-02U-N4 + dual TLV3501 + TDC7201")
+    (comment 3 "USB-C 5V input, 3.3V LDO, SPI interface")
+  )
+
+  (lib_symbols
+    ;; -----------------------------------------------------------------------
+    ;; TDC7201 – Time-to-Digital Converter (TSSOP-16)
+    ;; -----------------------------------------------------------------------
+    (symbol "TDC7201"
+      (pin_names (offset 0.254))
+      (in_bom yes) (on_board yes)
+      (property "Reference" "U" (at 0 9 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "TDC7201" (at 0 -9 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "Package_SO:TSSOP-16_4.4x5mm_P0.65mm" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+      (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tdc7201.pdf" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+      (symbol "TDC7201_0_1"
+        (rectangle (start -7.62 8.89) (end 7.62 -8.89)
+          (stroke (width 0.254) (type solid)) (fill (type background)))
+      )
+      (symbol "TDC7201_1_1"
+        (pin input line (at -10.16 7.62 0) (length 2.54)
+          (name "START" (effects (font (size 1.27 1.27))))
+          (number "1" (effects (font (size 1.27 1.27)))))
+        (pin input line (at -10.16 5.08 0) (length 2.54)
+          (name "STOP1" (effects (font (size 1.27 1.27))))
+          (number "2" (effects (font (size 1.27 1.27)))))
+        (pin input line (at -10.16 2.54 0) (length 2.54)
+          (name "STOP2" (effects (font (size 1.27 1.27))))
+          (number "3" (effects (font (size 1.27 1.27)))))
+        (pin input line (at -10.16 0 0) (length 2.54)
+          (name "CLK" (effects (font (size 1.27 1.27))))
+          (number "4" (effects (font (size 1.27 1.27)))))
+        (pin input line (at -10.16 -2.54 0) (length 2.54)
+          (name "~{ENABLE}" (effects (font (size 1.27 1.27))))
+          (number "5" (effects (font (size 1.27 1.27)))))
+        (pin input line (at -10.16 -5.08 0) (length 2.54)
+          (name "TRIG" (effects (font (size 1.27 1.27))))
+          (number "6" (effects (font (size 1.27 1.27)))))
+        (pin output line (at 10.16 7.62 180) (length 2.54)
+          (name "~{INT}" (effects (font (size 1.27 1.27))))
+          (number "7" (effects (font (size 1.27 1.27)))))
+        (pin bidirectional line (at 10.16 5.08 180) (length 2.54)
+          (name "SDA/SDO" (effects (font (size 1.27 1.27))))
+          (number "8" (effects (font (size 1.27 1.27)))))
+        (pin input line (at 10.16 2.54 180) (length 2.54)
+          (name "SCL/SCLK" (effects (font (size 1.27 1.27))))
+          (number "9" (effects (font (size 1.27 1.27)))))
+        (pin input line (at 10.16 0 180) (length 2.54)
+          (name "SDI" (effects (font (size 1.27 1.27))))
+          (number "10" (effects (font (size 1.27 1.27)))))
+        (pin input line (at 10.16 -2.54 180) (length 2.54)
+          (name "~{CSB}" (effects (font (size 1.27 1.27))))
+          (number "11" (effects (font (size 1.27 1.27)))))
+        (pin input line (at 10.16 -5.08 180) (length 2.54)
+          (name "I2C/~{SPI}" (effects (font (size 1.27 1.27))))
+          (number "12" (effects (font (size 1.27 1.27)))))
+        (pin power_in line (at 0 -11.43 90) (length 2.54)
+          (name "GND" (effects (font (size 1.27 1.27))))
+          (number "13" (effects (font (size 1.27 1.27)))))
+        (pin power_in line (at 0 11.43 270) (length 2.54)
+          (name "VDD" (effects (font (size 1.27 1.27))))
+          (number "14" (effects (font (size 1.27 1.27)))))
+      )
+    )
+
+    ;; -----------------------------------------------------------------------
+    ;; TLV3501 – High-Speed Comparator (TSSOP-8)
+    ;; -----------------------------------------------------------------------
+    (symbol "TLV3501"
+      (pin_names (offset 0.254))
+      (in_bom yes) (on_board yes)
+      (property "Reference" "U" (at 0 5.08 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "TLV3501" (at 0 -5.08 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "Package_SO:TSSOP-8_3x3mm_P0.65mm" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+      (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tlv3501.pdf" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+      (symbol "TLV3501_0_1"
+        (polyline (pts (xy -5.08 3.81) (xy -5.08 -3.81) (xy 5.08 0) (xy -5.08 3.81))
+          (stroke (width 0.254) (type solid)) (fill (type background)))
+      )
+      (symbol "TLV3501_1_1"
+        (pin input line (at -7.62 1.27 0) (length 2.54)
+          (name "IN+" (effects (font (size 1.27 1.27))))
+          (number "1" (effects (font (size 1.27 1.27)))))
+        (pin input line (at -7.62 -1.27 0) (length 2.54)
+          (name "IN-" (effects (font (size 1.27 1.27))))
+          (number "2" (effects (font (size 1.27 1.27)))))
+        (pin power_in line (at 0 -5.08 90) (length 2.54)
+          (name "GND" (effects (font (size 1.27 1.27))))
+          (number "4" (effects (font (size 1.27 1.27)))))
+        (pin output line (at 7.62 0 180) (length 2.54)
+          (name "OUT" (effects (font (size 1.27 1.27))))
+          (number "5" (effects (font (size 1.27 1.27)))))
+        (pin power_in line (at 0 5.08 270) (length 2.54)
+          (name "VCC" (effects (font (size 1.27 1.27))))
+          (number "8" (effects (font (size 1.27 1.27)))))
+      )
+    )
+
+    ;; -----------------------------------------------------------------------
+    ;; ESP32-C3-WROOM-02U – WiFi Microcontroller Module
+    ;; -----------------------------------------------------------------------
+    (symbol "ESP32-C3-WROOM-02U"
+      (pin_names (offset 0.254))
+      (in_bom yes) (on_board yes)
+      (property "Reference" "U" (at 0 15.24 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "ESP32-C3-WROOM-02U-N4" (at 0 -15.24 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "RF_Module:ESP32-C3-WROOM-02" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+      (symbol "ESP32-C3-WROOM-02U_0_1"
+        (rectangle (start -10.16 13.97) (end 10.16 -13.97)
+          (stroke (width 0.254) (type solid)) (fill (type background)))
+      )
+      (symbol "ESP32-C3-WROOM-02U_1_1"
+        (pin power_in line (at 0 16.51 270) (length 2.54)
+          (name "3V3" (effects (font (size 1.27 1.27))))
+          (number "1" (effects (font (size 1.27 1.27)))))
+        (pin power_in line (at 0 -16.51 90) (length 2.54)
+          (name "GND" (effects (font (size 1.27 1.27))))
+          (number "2" (effects (font (size 1.27 1.27)))))
+        (pin input line (at -12.7 11.43 0) (length 2.54)
+          (name "EN" (effects (font (size 1.27 1.27))))
+          (number "3" (effects (font (size 1.27 1.27)))))
+        (pin bidirectional line (at 12.7 10.16 180) (length 2.54)
+          (name "GPIO4/SCK" (effects (font (size 1.27 1.27))))
+          (number "4" (effects (font (size 1.27 1.27)))))
+        (pin bidirectional line (at 12.7 7.62 180) (length 2.54)
+          (name "GPIO5/MISO" (effects (font (size 1.27 1.27))))
+          (number "5" (effects (font (size 1.27 1.27)))))
+        (pin bidirectional line (at 12.7 5.08 180) (length 2.54)
+          (name "GPIO6/MOSI" (effects (font (size 1.27 1.27))))
+          (number "6" (effects (font (size 1.27 1.27)))))
+        (pin bidirectional line (at 12.7 2.54 180) (length 2.54)
+          (name "GPIO7/CS" (effects (font (size 1.27 1.27))))
+          (number "7" (effects (font (size 1.27 1.27)))))
+        (pin bidirectional line (at 12.7 0 180) (length 2.54)
+          (name "GPIO8/ENABLE" (effects (font (size 1.27 1.27))))
+          (number "8" (effects (font (size 1.27 1.27)))))
+        (pin bidirectional line (at 12.7 -2.54 180) (length 2.54)
+          (name "GPIO9/TRIG" (effects (font (size 1.27 1.27))))
+          (number "9" (effects (font (size 1.27 1.27)))))
+        (pin bidirectional line (at 12.7 -5.08 180) (length 2.54)
+          (name "GPIO10/INT" (effects (font (size 1.27 1.27))))
+          (number "10" (effects (font (size 1.27 1.27)))))
+        (pin bidirectional line (at -12.7 -2.54 0) (length 2.54)
+          (name "GPIO20/RX" (effects (font (size 1.27 1.27))))
+          (number "20" (effects (font (size 1.27 1.27)))))
+        (pin bidirectional line (at -12.7 -5.08 0) (length 2.54)
+          (name "GPIO21/TX" (effects (font (size 1.27 1.27))))
+          (number "21" (effects (font (size 1.27 1.27)))))
+      )
+    )
+
+    ;; -----------------------------------------------------------------------
+    ;; AMS1117-3.3 – LDO Voltage Regulator (SOT-223)
+    ;; -----------------------------------------------------------------------
+    (symbol "AMS1117-3.3"
+      (pin_names (offset 0.254))
+      (in_bom yes) (on_board yes)
+      (property "Reference" "U" (at 0 5.08 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "AMS1117-3.3" (at 0 -5.08 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "Package_TO_SOT_SMD:SOT-223-3_TabPin2" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+      (symbol "AMS1117-3.3_0_1"
+        (rectangle (start -3.81 3.81) (end 3.81 -3.81)
+          (stroke (width 0.254) (type solid)) (fill (type background)))
+      )
+      (symbol "AMS1117-3.3_1_1"
+        (pin power_in line (at -6.35 0 0) (length 2.54)
+          (name "IN" (effects (font (size 1.27 1.27))))
+          (number "1" (effects (font (size 1.27 1.27)))))
+        (pin power_in line (at 0 -6.35 90) (length 2.54)
+          (name "GND" (effects (font (size 1.27 1.27))))
+          (number "2" (effects (font (size 1.27 1.27)))))
+        (pin power_out line (at 6.35 0 180) (length 2.54)
+          (name "OUT" (effects (font (size 1.27 1.27))))
+          (number "3" (effects (font (size 1.27 1.27)))))
+      )
+    )
+  )
+
+  ;; -------------------------------------------------------------------------
+  ;; Schematic instances (placement)
+  ;; -------------------------------------------------------------------------
+
+  ;; U3 – TDC7201
+  (symbol (lib_id "TDC7201") (at 120 80 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid "tdc7201-main-u3")
+    (property "Reference" "U3" (at 120 70 0))
+    (property "Value" "TDC7201" (at 120 72 0))
+    (property "Footprint" "Package_SO:TSSOP-16_4.4x5mm_P0.65mm" (at 0 0 0) (effects (hide yes)))
+  )
+
+  ;; U4 – TLV3501 (PPS channel)
+  (symbol (lib_id "TLV3501") (at 60 60 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid "tlv3501-pps-u4")
+    (property "Reference" "U4" (at 60 55 0))
+    (property "Value" "TLV3501" (at 60 53 0))
+  )
+
+  ;; U5 – TLV3501 (10 MHz reference channel)
+  (symbol (lib_id "TLV3501") (at 60 100 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid "tlv3501-ref-u5")
+    (property "Reference" "U5" (at 60 95 0))
+    (property "Value" "TLV3501" (at 60 93 0))
+  )
+
+  ;; U7 – ESP32-C3-WROOM-02U-N4
+  (symbol (lib_id "ESP32-C3-WROOM-02U") (at 200 80 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid "esp32c3-u7")
+    (property "Reference" "U7" (at 200 65 0))
+    (property "Value" "ESP32-C3-WROOM-02U-N4" (at 200 63 0))
+  )
+
+  ;; U2 – AMS1117-3.3
+  (symbol (lib_id "AMS1117-3.3") (at 40 140 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid "ams1117-u2")
+    (property "Reference" "U2" (at 40 135 0))
+    (property "Value" "AMS1117-3.3" (at 40 133 0))
+  )
+
+  ;; -------------------------------------------------------------------------
+  ;; Power nets and labels
+  ;; -------------------------------------------------------------------------
+  (global_label "+3V3" (shape input) (at 120 60 270)
+    (effects (font (size 1.27 1.27)))
+    (uuid "pwr-3v3-tdc"))
+  (global_label "+5V" (shape input) (at 40 130 270)
+    (effects (font (size 1.27 1.27)))
+    (uuid "pwr-5v-vreg"))
+  (global_label "GND" (shape input) (at 120 100 90)
+    (effects (font (size 1.27 1.27)))
+    (uuid "pwr-gnd-tdc"))
+
+  ;; -------------------------------------------------------------------------
+  ;; Net labels for key signals
+  ;; -------------------------------------------------------------------------
+  (net_label "START" (at 90 80 0) (uuid "net-start"))
+  (net_label "STOP" (at 90 85 0) (uuid "net-stop"))
+  (net_label "SPI_MOSI" (at 160 80 0) (uuid "net-mosi"))
+  (net_label "SPI_MISO" (at 160 82 0) (uuid "net-miso"))
+  (net_label "SPI_SCK" (at 160 84 0) (uuid "net-sck"))
+  (net_label "SPI_CS" (at 160 86 0) (uuid "net-cs"))
+  (net_label "TDC_INT" (at 160 88 0) (uuid "net-int"))
+  (net_label "TDC_ENABLE" (at 160 90 0) (uuid "net-enable"))
+
+  ;; -------------------------------------------------------------------------
+  ;; Schematic-level wires (abbreviated – key connections shown)
+  ;;
+  ;; J1 (SMA PPS) → R_TERM1 → C_AC1 → U4.IN+ → (TL07401 delay) → U3.START
+  ;; J2 (SMA 10MHz) → R_TERM2 → C_AC2 → U5.IN+ → U3.STOP1
+  ;; U3.SDO/SDA → U7.GPIO5 (MISO)
+  ;; U3.SCLK/SCL → U7.GPIO4 (SCK)
+  ;; U3.SDI → U7.GPIO6 (MOSI)
+  ;; U3.~{CSB} → U7.GPIO7 (CS)
+  ;; U3.~{INT} → U7.GPIO10
+  ;; U3.ENABLE → U7.GPIO8
+  ;; U3.TRIG → U7.GPIO9
+  ;; U2.IN ← +5V (USB-C through ESD diode)
+  ;; U2.OUT → +3V3 (TDC7201, ESP32-C3)
+  ;; -------------------------------------------------------------------------
+
+  ;; -------------------------------------------------------------------------
+  ;; Decoupling capacitors (representative – all 100 nF 0603 X5R)
+  ;; -------------------------------------------------------------------------
+  ;; C1–C10: 100 nF decoupling near each IC power pin
+  ;; C11–C12: 10 µF bulk at USB input and LDO output
+  ;; L1–L2: BLM21PG221SN1D ferrite beads (analog/digital power separation)
+
+  ;; -------------------------------------------------------------------------
+  ;; Test points (TP1–TP12)
+  ;; TP1: +5V rail       TP2: GND            TP3: +3V3 rail
+  ;; TP4: START signal   TP5: STOP signal     TP6: TDC7201 CLK
+  ;; TP7: SPI_SCK        TP8: SPI_MOSI        TP9: SPI_MISO
+  ;; TP10: TDC_INT       TP11: PPS_IN (raw)   TP12: 10MHz_IN (raw)
+  ;; -------------------------------------------------------------------------
+
+  ;; -------------------------------------------------------------------------
+  ;; SMA Connectors
+  ;; J1: PPS Input (SMA)
+  ;; J2: 10 MHz Reference Input (SMA)
+  ;; J3: WiFi Antenna (SMA / IPX)
+  ;; -------------------------------------------------------------------------
+
+)

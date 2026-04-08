@@ -1,115 +1,196 @@
 <template>
-  <div class="dashboard">
-    <h1>Real-Time Measurements</h1>
-    <div class="measurements">
-      <h2>Phase Difference: <span>{{ phaseDifference }}</span> ps</h2>
-      <h2>Measurement Count: <span>{{ measurementCount }}</span></h2>
-    </div>
-    <div class="uncertainty-analysis">
-      <h2>Uncertainty Analysis</h2>
-      <div>
-        <div>Total RSS Uncertainty: 1.1 ps</div>
-        <div>Comparator Offset: <span>{{ comparatorOffset }} ps</span></div>
-        <div>Comparator Jitter: <span>{{ comparatorJitter }} ps</span></div>
-        <div>TDC Resolution: <span>{{ tdcResolution }} ps</span></div>
-        <div>Delay Line Error: <span>{{ delayLineError }} ps</span></div>
-        <div>Temperature Drift: <span>{{ temperatureDrift }} ps</span></div>
-        <div class="percentage-bars">
-          <div class="bar"><div class="fill" :style="{ width: '45%' }"></div> Comparator Offset (0.5 ps)</div>
-          <div class="bar"><div class="fill" :style="{ width: '5%' }"></div> Comparator Jitter (0.05 ps)</div>
-          <div class="bar"><div class="fill" :style="{ width: '5.5%' }"></div> TDC Resolution (0.055 ps)</div>
-          <div class="bar"><div class="fill" :style="{ width: '45%' }"></div> Delay Line Error (0.5 ps)</div>
-          <div class="bar"><div class="fill" :style="{ width: '10%' }"></div> Temperature Drift (0.1 ps)</div>
-        </div>
+  <div class="app-shell">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <h1 class="app-title">TDC7201 GPSDO Module</h1>
+        <span class="app-subtitle">Precision Timing Measurement Dashboard</span>
       </div>
-    </div>
-    <div class="configuration">
-      <h2>Configuration</h2>
-      <label for="delayLineTap">Delay Line Tap:</label>
-      <input type="range" id="delayLineTap" min="0" max="14" v-model="delayLineTap" @input="updateDelayLineTap"> ns
-      <label for="measurementMode">Measurement Mode:</label>
-      <select id="measurementMode" v-model="measurementMode">
-        <option value="phase">Phase</option>
-        <option value="frequency">Frequency</option>
-        <option value="time-interval">Time Interval</option>
-      </select>
-    </div>
-    <div v-if="connectionStatus">
-      <p>Connected to API</p>
-    </div>
-    <div v-else>
-      <p>Disconnected from API</p>
-    </div>
+      <div class="header-right">
+        <span class="status-badge" :class="connected ? 'status-connected' : 'status-disconnected'">
+          {{ connected ? '● Connected' : '○ Disconnected' }}
+        </span>
+        <span class="ip-badge" v-if="deviceIp">{{ deviceIp }}</span>
+      </div>
+    </header>
+
+    <!-- Main grid -->
+    <main class="main-grid">
+      <MeasurementDisplay
+        :phase-diff-ps="phaseDiffPs"
+        :freq-offset-ppb="freqOffsetPpb"
+        :measurement-count="measurementCount"
+        :connected="connected"
+        class="grid-span-2"
+      />
+
+      <UncertaintyAnalysis
+        :uncertainty="uncertaintyBreakdown"
+        :total-rms-ps="totalUncertaintyPs"
+      />
+
+      <ConfigPanel @config-updated="onConfigUpdated" />
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      TDC7201 GPSDO Module &nbsp;·&nbsp; jeffkarney &nbsp;·&nbsp;
+      <a href="https://github.com/jeffkarney/TDC7201-GPSDO-Module" target="_blank">GitHub</a>
+    </footer>
   </div>
 </template>
 
 <script>
+import MeasurementDisplay   from './components/MeasurementDisplay.vue'
+import UncertaintyAnalysis  from './components/UncertaintyAnalysis.vue'
+import ConfigPanel          from './components/ConfigPanel.vue'
+import { startPolling }     from './api/measurements.js'
+
 export default {
+  name: 'App',
+
+  components: { MeasurementDisplay, UncertaintyAnalysis, ConfigPanel },
+
   data() {
     return {
-      phaseDifference: 0,
+      phaseDiffPs: 0,
+      freqOffsetPpb: 0,
       measurementCount: 0,
-      comparatorOffset: 0.5,
-      comparatorJitter: 0.05,
-      tdcResolution: 0.055,
-      delayLineError: 0.5,
-      temperatureDrift: 0.1,
-      delayLineTap: 0,
-      measurementMode: 'phase',
-      connectionStatus: false,
-    };
+      totalUncertaintyPs: 0,
+      uncertaintyBreakdown: {},
+      connected: false,
+      deviceIp: '',
+      _poller: null,
+    }
   },
-  methods: {
-    fetchMeasurements() {
-      setInterval(async () => {
-        try {
-          const response = await fetch('/api/measurements');
-          const data = await response.json();
-          this.phaseDifference = data.phaseDifference;
-          this.measurementCount = data.measurementCount;
-          this.connectionStatus = true;
-        } catch (error) {
-          console.error(error);
-          this.connectionStatus = false;
-        }
-      }, 100);
-    },
-    updateDelayLineTap() {
-      // Handle delay line tap change
-    },
-  },
+
   mounted() {
-    this.fetchMeasurements();
+    this._poller = startPolling(
+      (data) => {
+        this.phaseDiffPs       = data.phase_difference_ps  ?? 0
+        this.freqOffsetPpb     = data.freq_offset_ppb      ?? 0
+        this.measurementCount  = data.measurement_count    ?? 0
+        this.totalUncertaintyPs = data.uncertainty_ps      ?? 0
+        this.uncertaintyBreakdown = data.uncertainty_breakdown ?? {}
+        this.connected = true
+      },
+      () => {
+        this.connected = false
+      },
+      100   /* ms */
+    )
   },
-};
+
+  beforeUnmount() {
+    if (this._poller) this._poller.stop()
+  },
+
+  methods: {
+    onConfigUpdated(cfg) {
+      console.log('Config updated:', cfg)
+    },
+  },
+}
 </script>
 
+<style>
+/* Global reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #f0f2ff;
+  color: #222;
+  min-height: 100vh;
+}
+</style>
+
 <style scoped>
-.dashboard {
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ---- Header ---- */
+.app-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.app-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.app-subtitle {
+  font-size: 0.78rem;
+  opacity: 0.75;
+  display: block;
+  margin-top: 2px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-badge {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.status-connected    { background: rgba(76, 175, 80, 0.25); color: #b9f6ca; }
+.status-disconnected { background: rgba(244, 67, 54, 0.25); color: #ffcdd2; }
+
+.ip-badge {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  font-family: 'Courier New', monospace;
+}
+
+/* ---- Main grid ---- */
+.main-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-  background: linear-gradient(135deg, #6e3b8c, #e564de);
-  padding: 20px;
-  color: white;
+  padding: 24px;
+  flex: 1;
 }
-.measurements, .uncertainty-analysis, .configuration {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  padding: 15px;
+
+.grid-span-2 {
+  grid-column: span 2;
 }
-.percentage-bars {
-  margin-top: 10px;
+
+/* ---- Footer ---- */
+.app-footer {
+  text-align: center;
+  padding: 14px;
+  font-size: 0.78rem;
+  color: #888;
+  border-top: 1px solid #e0e0e0;
 }
-.bar {
-  background: #fff;
-  border-radius: 5px;
-  overflow: hidden;
-  position: relative;
-  margin-top: 5px;
+
+.app-footer a {
+  color: #667eea;
+  text-decoration: none;
 }
-.bar .fill {
-  background: #4caf50;
-  height: 100%;
+
+/* ---- Responsive ---- */
+@media (max-width: 700px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+    padding: 14px;
+  }
+  .grid-span-2 { grid-column: span 1; }
 }
 </style>

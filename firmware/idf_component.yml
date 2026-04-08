@@ -1,0 +1,15 @@
+## IDF Component Manager Manifest
+## See: https://docs.espressif.com/projects/idf-component-manager/en/latest/
+
+version: "1.0.0"
+description: "TDC7201 GPSDO Precision Timing Measurement Module Firmware"
+url: "https://github.com/jeffkarney/TDC7201-GPSDO-Module"
+
+targets:
+  - esp32c3
+
+dependencies:
+  idf:
+    version: ">=5.0.0"
+  espressif/cjson:
+    version: ">=1.7.15"

@@ -1,0 +1,36 @@
+# Node / npm
+node_modules/
+web/dist/
+web/.vite/
+*.log
+npm-debug.log*
+
+# ESP-IDF build artifacts
+firmware/build/
+firmware/sdkconfig
+firmware/sdkconfig.old
+firmware/dependencies.lock
+firmware/managed_components/
+*.elf
+*.bin
+*.map
+
+# KiCad generated files
+hardware/kicad/gerbers/
+hardware/kicad/*.bak
+hardware/kicad/*-backups/
+hardware/kicad/*.kicad_prl
+hardware/kicad/fp-info-cache
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*~
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local

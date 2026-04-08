@@ -1,18 +1,23 @@
-| Reference Designator | Part Number              | Manufacturer | Description                              | Value    | Quantity | Package      | Unit Cost | Notes        |
-|---------------------|--------------------------|--------------|------------------------------------------|----------|----------|--------------|-----------|--------------|
-| U1                  | TDC7201                  | JLCPCB       | Time-to-Digital Converter                | N/A      | 1        | -            | -         | JLCPCB C1334639 |
-| U2                  | TLV3501                  | JLCPCB       | High-Speed Comparator                    | N/A      | 2        | -            | -         | JLCPCB C118853 |
-| U3                  | ESP32-C3-WROOM-02U-N4    | JLCPCB       | Microcontroller with Wi-Fi and BLE      | N/A      | 1        | -            | -         | JLCPCB C89344 |
-| U4                  | AMS1117-3.3              | JLCPCB       | Low Dropout Voltage Regulator           | 3.3V     | 1        | -            | -         | JLCPCB C2672814 |
-| U5                  | TL07401                  | JLCPCB       | Quad Operational Amplifier               | N/A      | 1        | -            | -         | JLCPCB C2940341 |
-| U6                  | USBLC6-2SC6              | JLCPCB       | ESD Protection Diode                     | N/A      | 1        | -            | -         | JLCPCB C2040002 |
-| J1                  | USB-C Connector           | -            | USB Type-C Connector                     | N/A      | 1        | -            | -         |              |
-| J2                  | SMA Connector             | -            | SMA Antenna Connector                     | N/A      | 3        | -            | -         |              |
-| J3                  | IPX Antenna Connector     | -            | IPX Antenna Connector                   | N/A      | 1        | -            | -         |              |
-| C1,C2,C3,C4,C5,C6,C7,C8,C9,C10 | -               | -            | Capacitor                                | 100nF   | 10       | -            | -         |              |
-| C11,C12            | -                        | -            | Capacitor                                | 10µF    | 2        | -            | -         |              |
-| R1,R2,R3,R4       | -                        | -            | Resistor                                  | 10k     | 4        | -            | -         |              |
-| R5,R6,R7          | -                        | -            | Resistor                                  | 1k      | 6        | -            | -         |              |
-| R8,R9              | -                        | -            | Resistor                                  | 100     | 2        | -            | -         |              |
-| L1,L2              | -                        | -            | Ferrite Bead                            | N/A      | 2        | -            | -         |              |
-| TP1-TP10          | -                        | -            | Test Point                               | N/A      | 10       | -            | -         |              |
+Reference Designator,JLCPCB Part #,Manufacturer,MPN,Description,Value,Quantity,Package,Unit Cost (USD),Assembly Notes
+U3,C1334639,Texas Instruments,TDC7201ZRGT,Time-to-Digital Converter,TDC7201,1,TSSOP-16,25.00,Primary timing IC – analog section
+U4,C118853,Texas Instruments,TLV3501AIDBVT,High-Speed Comparator – PPS channel,TLV3501,1,TSSOP-8,1.50,Mount near J1 SMA connector
+U5,C118853,Texas Instruments,TLV3501AIDBVT,High-Speed Comparator – 10 MHz channel,TLV3501,1,TSSOP-8,1.50,Mount near J2 SMA connector
+U6,C2940341,Texas Instruments,TL07401DRHRT,Programmable Delay Line – START correction,TL07401,1,TSSOP-14,2.00,Between U4 and U3 START pin
+U7,C2913202,Espressif,ESP32-C3-WROOM-02U-N4,WiFi/BLE Microcontroller Module,ESP32-C3,1,SMD Module,4.50,Place with antenna facing board edge – 30 mm clearance
+U2,C6186,Advanced Monolithic Systems,AMS1117-3.3,3.3 V LDO Voltage Regulator,AMS1117-3.3,1,SOT-223,0.18,Near USB-C input
+D1,C2040002,STMicroelectronics,USBLC6-2SC6,USB ESD Protection Diode Array,USBLC6-2SC6,1,SOT-23-6,0.12,On USB-C VBUS and data lines
+J1,C2874483,Amphenol RF,132289,SMA Edge-Mount Connector – PPS Input,SMA-J PCB Edge,1,Through-hole,0.80,Left board edge – label "1PPS IN"
+J2,C2874483,Amphenol RF,132289,SMA Edge-Mount Connector – 10 MHz Input,SMA-J PCB Edge,1,Through-hole,0.80,Left board edge – label "10MHz IN"
+J3,C2874483,Amphenol RF,132289,SMA Edge-Mount Connector – WiFi Antenna,SMA-J PCB Edge,1,Through-hole,0.80,Right board edge – label "WIFI ANT"
+J4,C2765186,GCT,USB4085-GF-A,USB Type-C Receptacle 16-pin,USB-C,1,SMD,0.50,Bottom board edge – power input
+J5,C88374,Hirose,U.FL-R-SMT-1,IPX/U.FL SMD Antenna Connector,U.FL,1,SMD,0.35,Near U7 for WiFi antenna option
+C1,C21190,Yageo,CC0603KRX7R9BB104,MLCC 100 nF / 50 V / X7R – decoupling,100nF,10,0603,0.01,1 per IC power pin; place within 1 mm
+C11,C15850,Samsung,CL21A106KPFNNNE,MLCC 10 µF / 16 V / X5R – bulk,10uF,2,0805,0.05,USB-C input and LDO output
+L1,C1015,TDK,BLM21PG221SN1D,Ferrite Bead 220 Ω / 100 MHz – power filter,220R@100MHz,2,0805,0.04,Analog/digital power supply separation
+R1,C25117,Yageo,RC0603FR-0710KL,Resistor 10 kΩ 1% – SPI/GPIO pull-up,10k,4,0603,0.01,I2C pull-ups and ENABLE pull-up
+R2,C25118,Yageo,RC0603FR-071KL,Resistor 1 kΩ 1% – series termination,1k,4,0603,0.01,START/STOP trace series resistors
+R3,C11702,Yageo,RC0603FR-07100RL,Resistor 100 Ω 1% – signal current limit,100R,4,0603,0.01,USB-C CC resistors and LED current
+R4,C25819,Yageo,RC0603FR-0749R9L,Resistor 49.9 Ω 1% – 50 Ω input termination,50R,2,0603,0.01,SMA input termination (J1 J2)
+R5,C25117,Yageo,RC0603FR-0710KL,Resistor 10 kΩ 1% – voltage divider threshold,10k,2,0603,0.01,Comparator threshold set (VCC/2)
+TP1-TP12,C2337227,Keystone,5002,Test Point – Miniature SMD Round,1 mm pad,12,SMD,0.03,Label on silk screen per schematic
+
