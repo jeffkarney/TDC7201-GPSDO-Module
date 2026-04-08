@@ -1,29 +1,27 @@
 (kicad_sch
-  (version 20231120)
+  (version 20221018)
   (generator "eeschema")
-  (generator_version "7.0")
   (paper "A3")
   (title_block
     (title "TDC7201 GPSDO Precision Timing Measurement Module")
     (date "2026-04-08")
     (rev "1.0")
     (company "jeffkarney")
-    (comment 1 "4-Layer PCB – JLCPCB JLC04161H-7628")
+    (comment 1 "4-Layer PCB - JLCPCB JLC04161H-7628")
     (comment 2 "ESP32-C3-WROOM-02U-N4 + dual TLV3501 + TDC7201")
     (comment 3 "USB-C 5V input, 3.3V LDO, SPI interface")
   )
 
   (lib_symbols
-    ;; -----------------------------------------------------------------------
-    ;; TDC7201 – Time-to-Digital Converter (TSSOP-16)
-    ;; -----------------------------------------------------------------------
     (symbol "TDC7201"
       (pin_names (offset 0.254))
       (in_bom yes) (on_board yes)
       (property "Reference" "U" (at 0 9 0) (effects (font (size 1.27 1.27))))
       (property "Value" "TDC7201" (at 0 -9 0) (effects (font (size 1.27 1.27))))
-      (property "Footprint" "Package_SO:TSSOP-16_4.4x5mm_P0.65mm" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
-      (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tdc7201.pdf" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+      (property "Footprint" "Package_SO:TSSOP-16_4.4x5mm_P0.65mm" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) (hide yes)))
+      (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tdc7201.pdf" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) (hide yes)))
       (symbol "TDC7201_0_1"
         (rectangle (start -7.62 8.89) (end 7.62 -8.89)
           (stroke (width 0.254) (type solid)) (fill (type background)))
@@ -74,16 +72,15 @@
       )
     )
 
-    ;; -----------------------------------------------------------------------
-    ;; TLV3501 – High-Speed Comparator (TSSOP-8)
-    ;; -----------------------------------------------------------------------
     (symbol "TLV3501"
       (pin_names (offset 0.254))
       (in_bom yes) (on_board yes)
       (property "Reference" "U" (at 0 5.08 0) (effects (font (size 1.27 1.27))))
       (property "Value" "TLV3501" (at 0 -5.08 0) (effects (font (size 1.27 1.27))))
-      (property "Footprint" "Package_SO:TSSOP-8_3x3mm_P0.65mm" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
-      (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tlv3501.pdf" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+      (property "Footprint" "Package_SO:TSSOP-8_3x3mm_P0.65mm" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) (hide yes)))
+      (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tlv3501.pdf" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) (hide yes)))
       (symbol "TLV3501_0_1"
         (polyline (pts (xy -5.08 3.81) (xy -5.08 -3.81) (xy 5.08 0) (xy -5.08 3.81))
           (stroke (width 0.254) (type solid)) (fill (type background)))
@@ -107,15 +104,13 @@
       )
     )
 
-    ;; -----------------------------------------------------------------------
-    ;; ESP32-C3-WROOM-02U – WiFi Microcontroller Module
-    ;; -----------------------------------------------------------------------
     (symbol "ESP32-C3-WROOM-02U"
       (pin_names (offset 0.254))
       (in_bom yes) (on_board yes)
       (property "Reference" "U" (at 0 15.24 0) (effects (font (size 1.27 1.27))))
       (property "Value" "ESP32-C3-WROOM-02U-N4" (at 0 -15.24 0) (effects (font (size 1.27 1.27))))
-      (property "Footprint" "RF_Module:ESP32-C3-WROOM-02" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+      (property "Footprint" "RF_Module:ESP32-C3-WROOM-02" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) (hide yes)))
       (symbol "ESP32-C3-WROOM-02U_0_1"
         (rectangle (start -10.16 13.97) (end 10.16 -13.97)
           (stroke (width 0.254) (type solid)) (fill (type background)))
@@ -160,15 +155,13 @@
       )
     )
 
-    ;; -----------------------------------------------------------------------
-    ;; AMS1117-3.3 – LDO Voltage Regulator (SOT-223)
-    ;; -----------------------------------------------------------------------
     (symbol "AMS1117-3.3"
       (pin_names (offset 0.254))
       (in_bom yes) (on_board yes)
       (property "Reference" "U" (at 0 5.08 0) (effects (font (size 1.27 1.27))))
       (property "Value" "AMS1117-3.3" (at 0 -5.08 0) (effects (font (size 1.27 1.27))))
-      (property "Footprint" "Package_TO_SOT_SMD:SOT-223-3_TabPin2" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+      (property "Footprint" "Package_TO_SOT_SMD:SOT-223-3_TabPin2" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) (hide yes)))
       (symbol "AMS1117-3.3_0_1"
         (rectangle (start -3.81 3.81) (end 3.81 -3.81)
           (stroke (width 0.254) (type solid)) (fill (type background)))
@@ -185,114 +178,228 @@
           (number "3" (effects (font (size 1.27 1.27)))))
       )
     )
+
+    (symbol "USBLC6-2SC6"
+      (pin_names (offset 0.254))
+      (in_bom yes) (on_board yes)
+      (property "Reference" "D" (at 0 5.08 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "USBLC6-2SC6" (at 0 -5.08 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "Package_TO_SOT_SMD:SOT-23-6" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) (hide yes)))
+      (symbol "USBLC6-2SC6_0_1"
+        (rectangle (start -3.81 3.81) (end 3.81 -3.81)
+          (stroke (width 0.254) (type solid)) (fill (type background)))
+      )
+      (symbol "USBLC6-2SC6_1_1"
+        (pin bidirectional line (at -6.35 1.27 0) (length 2.54)
+          (name "VBUS" (effects (font (size 1.27 1.27))))
+          (number "1" (effects (font (size 1.27 1.27)))))
+        (pin power_in line (at 0 -6.35 90) (length 2.54)
+          (name "GND" (effects (font (size 1.27 1.27))))
+          (number "2" (effects (font (size 1.27 1.27)))))
+        (pin bidirectional line (at -6.35 -1.27 0) (length 2.54)
+          (name "D-" (effects (font (size 1.27 1.27))))
+          (number "3" (effects (font (size 1.27 1.27)))))
+        (pin bidirectional line (at 6.35 1.27 180) (length 2.54)
+          (name "D+" (effects (font (size 1.27 1.27))))
+          (number "4" (effects (font (size 1.27 1.27)))))
+        (pin bidirectional line (at 6.35 -1.27 180) (length 2.54)
+          (name "VBUS_OUT" (effects (font (size 1.27 1.27))))
+          (number "6" (effects (font (size 1.27 1.27)))))
+      )
+    )
+
+    (symbol "TL07401"
+      (pin_names (offset 0.254))
+      (in_bom yes) (on_board yes)
+      (property "Reference" "U" (at 0 7.62 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "TL07401" (at 0 -7.62 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "Package_SO:TSSOP-14_4.4x5mm_P0.65mm" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) (hide yes)))
+      (symbol "TL07401_0_1"
+        (rectangle (start -5.08 6.35) (end 5.08 -6.35)
+          (stroke (width 0.254) (type solid)) (fill (type background)))
+      )
+      (symbol "TL07401_1_1"
+        (pin input line (at -7.62 5.08 0) (length 2.54)
+          (name "IN" (effects (font (size 1.27 1.27))))
+          (number "1" (effects (font (size 1.27 1.27)))))
+        (pin output line (at 7.62 5.08 180) (length 2.54)
+          (name "OUT" (effects (font (size 1.27 1.27))))
+          (number "2" (effects (font (size 1.27 1.27)))))
+        (pin input line (at -7.62 2.54 0) (length 2.54)
+          (name "SEL0" (effects (font (size 1.27 1.27))))
+          (number "3" (effects (font (size 1.27 1.27)))))
+        (pin input line (at -7.62 0 0) (length 2.54)
+          (name "SEL1" (effects (font (size 1.27 1.27))))
+          (number "4" (effects (font (size 1.27 1.27)))))
+        (pin input line (at -7.62 -2.54 0) (length 2.54)
+          (name "SEL2" (effects (font (size 1.27 1.27))))
+          (number "5" (effects (font (size 1.27 1.27)))))
+        (pin power_in line (at 0 -8.89 90) (length 2.54)
+          (name "GND" (effects (font (size 1.27 1.27))))
+          (number "7" (effects (font (size 1.27 1.27)))))
+        (pin power_in line (at 0 8.89 270) (length 2.54)
+          (name "VCC" (effects (font (size 1.27 1.27))))
+          (number "14" (effects (font (size 1.27 1.27)))))
+      )
+    )
   )
 
-  ;; -------------------------------------------------------------------------
-  ;; Schematic instances (placement)
-  ;; -------------------------------------------------------------------------
-
-  ;; U3 – TDC7201
   (symbol (lib_id "TDC7201") (at 120 80 0) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid "tdc7201-main-u3")
-    (property "Reference" "U3" (at 120 70 0))
-    (property "Value" "TDC7201" (at 120 72 0))
-    (property "Footprint" "Package_SO:TSSOP-16_4.4x5mm_P0.65mm" (at 0 0 0) (effects (hide yes)))
+    (property "Reference" "U3" (at 120 70 0)
+      (effects (font (size 1.27 1.27))))
+    (property "Value" "TDC7201" (at 120 72 0)
+      (effects (font (size 1.27 1.27))))
+    (property "Footprint" "Package_SO:TSSOP-16_4.4x5mm_P0.65mm" (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Datasheet" "" (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (hide yes)))
   )
 
-  ;; U4 – TLV3501 (PPS channel)
   (symbol (lib_id "TLV3501") (at 60 60 0) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid "tlv3501-pps-u4")
-    (property "Reference" "U4" (at 60 55 0))
-    (property "Value" "TLV3501" (at 60 53 0))
+    (property "Reference" "U4" (at 60 55 0)
+      (effects (font (size 1.27 1.27))))
+    (property "Value" "TLV3501" (at 60 53 0)
+      (effects (font (size 1.27 1.27))))
+    (property "Footprint" "Package_SO:TSSOP-8_3x3mm_P0.65mm" (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Datasheet" "" (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (hide yes)))
   )
 
-  ;; U5 – TLV3501 (10 MHz reference channel)
   (symbol (lib_id "TLV3501") (at 60 100 0) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid "tlv3501-ref-u5")
-    (property "Reference" "U5" (at 60 95 0))
-    (property "Value" "TLV3501" (at 60 93 0))
+    (property "Reference" "U5" (at 60 95 0)
+      (effects (font (size 1.27 1.27))))
+    (property "Value" "TLV3501" (at 60 93 0)
+      (effects (font (size 1.27 1.27))))
+    (property "Footprint" "Package_SO:TSSOP-8_3x3mm_P0.65mm" (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Datasheet" "" (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (hide yes)))
   )
 
-  ;; U7 – ESP32-C3-WROOM-02U-N4
+  (symbol (lib_id "TL07401") (at 90 80 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid "tl07401-u6")
+    (property "Reference" "U6" (at 90 72 0)
+      (effects (font (size 1.27 1.27))))
+    (property "Value" "TL07401" (at 90 74 0)
+      (effects (font (size 1.27 1.27))))
+    (property "Footprint" "Package_SO:TSSOP-14_4.4x5mm_P0.65mm" (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Datasheet" "" (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (hide yes)))
+  )
+
   (symbol (lib_id "ESP32-C3-WROOM-02U") (at 200 80 0) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid "esp32c3-u7")
-    (property "Reference" "U7" (at 200 65 0))
-    (property "Value" "ESP32-C3-WROOM-02U-N4" (at 200 63 0))
+    (property "Reference" "U7" (at 200 65 0)
+      (effects (font (size 1.27 1.27))))
+    (property "Value" "ESP32-C3-WROOM-02U-N4" (at 200 63 0)
+      (effects (font (size 1.27 1.27))))
+    (property "Footprint" "RF_Module:ESP32-C3-WROOM-02" (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Datasheet" "" (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (hide yes)))
   )
 
-  ;; U2 – AMS1117-3.3
   (symbol (lib_id "AMS1117-3.3") (at 40 140 0) (unit 1)
     (in_bom yes) (on_board yes)
-    (uuid "ams1117-u2")
-    (property "Reference" "U2" (at 40 135 0))
-    (property "Value" "AMS1117-3.3" (at 40 133 0))
+    (uuid "ams1117-u1")
+    (property "Reference" "U1" (at 40 135 0)
+      (effects (font (size 1.27 1.27))))
+    (property "Value" "AMS1117-3.3" (at 40 133 0)
+      (effects (font (size 1.27 1.27))))
+    (property "Footprint" "Package_TO_SOT_SMD:SOT-223-3_TabPin2" (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Datasheet" "" (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (hide yes)))
   )
 
-  ;; -------------------------------------------------------------------------
-  ;; Power nets and labels
-  ;; -------------------------------------------------------------------------
+  (symbol (lib_id "USBLC6-2SC6") (at 20 140 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid "usblc6-d1")
+    (property "Reference" "D1" (at 20 135 0)
+      (effects (font (size 1.27 1.27))))
+    (property "Value" "USBLC6-2SC6" (at 20 133 0)
+      (effects (font (size 1.27 1.27))))
+    (property "Footprint" "Package_TO_SOT_SMD:SOT-23-6" (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Datasheet" "" (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (hide yes)))
+  )
+
   (global_label "+3V3" (shape input) (at 120 60 270)
     (effects (font (size 1.27 1.27)))
-    (uuid "pwr-3v3-tdc"))
+    (uuid "pwr-3v3-tdc")
+    (property "Intersheet References" "${INTERSHEET_REFS}" (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (hide yes)))
+  )
   (global_label "+5V" (shape input) (at 40 130 270)
     (effects (font (size 1.27 1.27)))
-    (uuid "pwr-5v-vreg"))
+    (uuid "pwr-5v-vreg")
+    (property "Intersheet References" "${INTERSHEET_REFS}" (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (hide yes)))
+  )
   (global_label "GND" (shape input) (at 120 100 90)
     (effects (font (size 1.27 1.27)))
-    (uuid "pwr-gnd-tdc"))
+    (uuid "pwr-gnd-tdc")
+    (property "Intersheet References" "${INTERSHEET_REFS}" (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (hide yes)))
+  )
 
-  ;; -------------------------------------------------------------------------
-  ;; Net labels for key signals
-  ;; -------------------------------------------------------------------------
-  (net_label "START" (at 90 80 0) (uuid "net-start"))
-  (net_label "STOP" (at 90 85 0) (uuid "net-stop"))
-  (net_label "SPI_MOSI" (at 160 80 0) (uuid "net-mosi"))
-  (net_label "SPI_MISO" (at 160 82 0) (uuid "net-miso"))
-  (net_label "SPI_SCK" (at 160 84 0) (uuid "net-sck"))
-  (net_label "SPI_CS" (at 160 86 0) (uuid "net-cs"))
-  (net_label "TDC_INT" (at 160 88 0) (uuid "net-int"))
-  (net_label "TDC_ENABLE" (at 160 90 0) (uuid "net-enable"))
+  (label "START" (at 90 80 0)
+    (effects (font (size 1.27 1.27)))
+    (uuid "net-start"))
+  (label "STOP" (at 90 85.08 0)
+    (effects (font (size 1.27 1.27)))
+    (uuid "net-stop"))
+  (label "SPI_MOSI" (at 160 80 0)
+    (effects (font (size 1.27 1.27)))
+    (uuid "net-mosi"))
+  (label "SPI_MISO" (at 160 82.54 0)
+    (effects (font (size 1.27 1.27)))
+    (uuid "net-miso"))
+  (label "SPI_SCK" (at 160 85.08 0)
+    (effects (font (size 1.27 1.27)))
+    (uuid "net-sck"))
+  (label "SPI_CS" (at 160 87.62 0)
+    (effects (font (size 1.27 1.27)))
+    (uuid "net-cs"))
+  (label "TDC_INT" (at 160 90.16 0)
+    (effects (font (size 1.27 1.27)))
+    (uuid "net-int"))
+  (label "TDC_ENABLE" (at 160 92.70 0)
+    (effects (font (size 1.27 1.27)))
+    (uuid "net-enable"))
+  (label "PPS_IN" (at 20 60 0)
+    (effects (font (size 1.27 1.27)))
+    (uuid "net-ppsin"))
+  (label "10MHZ_IN" (at 20 100 0)
+    (effects (font (size 1.27 1.27)))
+    (uuid "net-10mhz"))
+  (label "WiFi_RX" (at 170 77.46 180)
+    (effects (font (size 1.27 1.27)))
+    (uuid "net-wifi-rx"))
+  (label "WiFi_TX" (at 170 74.92 180)
+    (effects (font (size 1.27 1.27)))
+    (uuid "net-wifi-tx"))
 
-  ;; -------------------------------------------------------------------------
-  ;; Schematic-level wires (abbreviated – key connections shown)
-  ;;
-  ;; J1 (SMA PPS) → R_TERM1 → C_AC1 → U4.IN+ → (TL07401 delay) → U3.START
-  ;; J2 (SMA 10MHz) → R_TERM2 → C_AC2 → U5.IN+ → U3.STOP1
-  ;; U3.SDO/SDA → U7.GPIO5 (MISO)
-  ;; U3.SCLK/SCL → U7.GPIO4 (SCK)
-  ;; U3.SDI → U7.GPIO6 (MOSI)
-  ;; U3.~{CSB} → U7.GPIO7 (CS)
-  ;; U3.~{INT} → U7.GPIO10
-  ;; U3.ENABLE → U7.GPIO8
-  ;; U3.TRIG → U7.GPIO9
-  ;; U2.IN ← +5V (USB-C through ESD diode)
-  ;; U2.OUT → +3V3 (TDC7201, ESP32-C3)
-  ;; -------------------------------------------------------------------------
-
-  ;; -------------------------------------------------------------------------
-  ;; Decoupling capacitors (representative – all 100 nF 0603 X5R)
-  ;; -------------------------------------------------------------------------
-  ;; C1–C10: 100 nF decoupling near each IC power pin
-  ;; C11–C12: 10 µF bulk at USB input and LDO output
-  ;; L1–L2: BLM21PG221SN1D ferrite beads (analog/digital power separation)
-
-  ;; -------------------------------------------------------------------------
-  ;; Test points (TP1–TP12)
-  ;; TP1: +5V rail       TP2: GND            TP3: +3V3 rail
-  ;; TP4: START signal   TP5: STOP signal     TP6: TDC7201 CLK
-  ;; TP7: SPI_SCK        TP8: SPI_MOSI        TP9: SPI_MISO
-  ;; TP10: TDC_INT       TP11: PPS_IN (raw)   TP12: 10MHz_IN (raw)
-  ;; -------------------------------------------------------------------------
-
-  ;; -------------------------------------------------------------------------
-  ;; SMA Connectors
-  ;; J1: PPS Input (SMA)
-  ;; J2: 10 MHz Reference Input (SMA)
-  ;; J3: WiFi Antenna (SMA / IPX)
-  ;; -------------------------------------------------------------------------
+  (wire (pts (xy 52.38 61.27) (xy 67.31 61.27))
+    (uuid "wire-u4out-start"))
+  (wire (pts (xy 52.38 98.73) (xy 67.31 98.73))
+    (uuid "wire-u5out-stop"))
+  (wire (pts (xy 97.54 80) (xy 109.22 87.38))
+    (uuid "wire-u6out-tdc"))
+  (wire (pts (xy 130.16 87.38) (xy 145.0 80))
+    (uuid "wire-tdc-spi"))
 
 )
