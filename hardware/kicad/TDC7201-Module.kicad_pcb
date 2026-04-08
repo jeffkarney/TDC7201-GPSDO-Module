@@ -1,424 +1,76 @@
-(kicad_pcb
-  (version 20231120)
-  (generator "pcbnew")
-  (generator_version "7.0")
-
-  ;; -------------------------------------------------------------------------
-  ;; General board settings
-  ;; -------------------------------------------------------------------------
-  (general
-    (thickness 1.6)
-    (legacy_teardrops no)
+(kicad_pcb (version 20231120) (generator "pcbnew") (generator_version "7.0")
+  (layers 
+    (layer F.Cu) 
+    (layer B.Cu) 
+    (layer F.Silkscreen) 
+    (layer B.Silkscreen) 
+    (layer F.Mask) 
+    (layer B.Mask) 
+    (layer Dwgs.User) 
+    (layer Cmts.User) 
+    (layer Eco1.User) 
+    (layer Eco2.User) 
+    (layer Edge.Cuts)
   )
-
-  ;; -------------------------------------------------------------------------
-  ;; Page / paper
-  ;; -------------------------------------------------------------------------
-  (paper "A4")
-
-  ;; -------------------------------------------------------------------------
-  ;; Layer definitions (4-layer stack for JLCPCB JLC04161H-7628)
-  ;;   Layer 1 (F.Cu):  Signal – top side
-  ;;   Layer 2 (In1.Cu): GND plane (solid copper)
-  ;;   Layer 3 (In2.Cu): Power plane (3.3 V / 5 V split)
-  ;;   Layer 4 (B.Cu):  Signal – bottom side
-  ;; -------------------------------------------------------------------------
-  (layers
-    (0  "F.Cu"      signal)
-    (1  "In1.Cu"    power   "GND Plane")
-    (2  "In2.Cu"    power   "Power Plane 3V3/5V")
-    (31 "B.Cu"      signal)
-    (32 "B.Adhes"   user)
-    (33 "F.Adhes"   user)
-    (34 "B.Paste"   user)
-    (35 "F.Paste"   user)
-    (36 "B.SilkS"   user)
-    (37 "F.SilkS"   user)
-    (38 "B.Mask"    user)
-    (39 "F.Mask"    user)
-    (40 "Dwgs.User" user)
-    (41 "Cmts.User" user)
-    (42 "Eco1.User" user)
-    (43 "Eco2.User" user)
-    (44 "Edge.Cuts" user)
-    (45 "Margin"    user)
-    (46 "B.CrtYd"   user)
-    (47 "F.CrtYd"   user)
-    (48 "B.Fab"     user)
-    (49 "F.Fab"     user)
-  )
-
-  ;; -------------------------------------------------------------------------
-  ;; Design rules (JLCPCB standard 4-layer capabilities)
-  ;; -------------------------------------------------------------------------
-  (setup
-    (pad_to_mask_clearance 0.05)
-    (solder_mask_min_width 0)
-    (pcbplotparams
-      (layerselection 0x00010fc_ffffffff)
-      (outputdirectory "gerbers/")
-      (usegerberextensions no)
-      (usegerberattributes yes)
-      (usegerberadvancedattributes yes)
-      (creategerberjobfile yes)
-      (svguseinch no)
-      (svgprecision 4)
-      (excludeedgelayer yes)
-      (plotframeref no)
-      (viasonmask no)
-      (mode 1)
-      (useauxorigin no)
-      (hpglpennumber 1)
-      (hpglpenspeed 20)
-      (hpglpendiameter 15.0)
-      (dxfpolygonmode yes)
-      (dxfimperialunits yes)
-      (dxfusepcbnewfont yes)
-      (psnegative no)
-      (psa4output no)
-      (plotreference yes)
-      (plotvalue yes)
-      (plotinvisibletext no)
-      (sketchpadsonfab no)
-      (subtractmaskfromsilk no)
-      (outputformat 1)
-      (mirror no)
-      (drillshape 0)
-      (scaleselection 1)
-      (outputdirectory "gerbers/")
-    )
-  )
-
-  ;; -------------------------------------------------------------------------
-  ;; Net classes
-  ;; -------------------------------------------------------------------------
   (net_settings
-    (classes
-      (net_class "Default" ""
-        (clearance 0.15)
-        (trace_width 0.2)
-        (via_dia 0.8)
-        (via_drill 0.4)
-        (microvia_dia 0.3)
-        (microvia_drill 0.1)
-        (diff_pair_width 0.2)
-        (diff_pair_gap 0.25)
-      )
-      (net_class "High_Speed" "START, STOP, SPI signals"
-        (clearance 0.2)
-        (trace_width 0.254)
-        (via_dia 0.8)
-        (via_drill 0.4)
-        (microvia_dia 0.3)
-        (microvia_drill 0.1)
-        (diff_pair_width 0.254)
-        (diff_pair_gap 0.25)
-        (nets "START" "STOP" "SPI_MOSI" "SPI_MISO" "SPI_SCK" "SPI_CS")
-      )
-      (net_class "Power" "Power rails"
-        (clearance 0.2)
-        (trace_width 0.5)
-        (via_dia 1.0)
-        (via_drill 0.5)
-        (microvia_dia 0.3)
-        (microvia_drill 0.1)
-        (diff_pair_width 0.5)
-        (diff_pair_gap 0.5)
-        (nets "+3V3" "+5V" "GND")
-      )
-    )
+    (net_class "Default" (width 0.3) (max_current 0.5))
+    (net_class "GND" (width 1.0) (max_current 2.0))
   )
-
-  ;; -------------------------------------------------------------------------
-  ;; Board outline (80 mm × 50 mm)
-  ;; -------------------------------------------------------------------------
-  (gr_rect
-    (start 0 0) (end 80 50)
-    (layer "Edge.Cuts")
-    (stroke (width 0.1) (type solid))
-    (uuid "board-outline")
+  (outline
+    (xy 0 0) 
+    (size 80000 50000) 
   )
-
-  ;; -------------------------------------------------------------------------
-  ;; Component footprints
-  ;; Note: coordinates in mm from board origin at bottom-left corner.
-  ;; -------------------------------------------------------------------------
-
-  ;; U3 – TDC7201 (TSSOP-16, analog section, centre-left)
-  (footprint "Package_SO:TSSOP-16_4.4x5mm_P0.65mm"
-    (layer "F.Cu")
-    (at 25 25 0)
-    (descr "TDC7201 Time-to-Digital Converter")
-    (reference "U3" (at 0 -4 0) (layer "F.SilkS"))
-    (value "TDC7201" (at 0 4 0) (layer "F.Fab"))
-    (uuid "fp-u3-tdc7201")
-  )
-
-  ;; U4 – TLV3501 PPS comparator (TSSOP-8, near J1)
-  (footprint "Package_SO:TSSOP-8_3x3mm_P0.65mm"
-    (layer "F.Cu")
-    (at 10 20 0)
-    (descr "TLV3501 High-Speed Comparator – PPS channel")
-    (reference "U4" (at 0 -3 0) (layer "F.SilkS"))
-    (value "TLV3501" (at 0 3 0) (layer "F.Fab"))
-    (uuid "fp-u4-tlv3501-pps")
-  )
-
-  ;; U5 – TLV3501 10 MHz comparator (TSSOP-8, near J2)
-  (footprint "Package_SO:TSSOP-8_3x3mm_P0.65mm"
-    (layer "F.Cu")
-    (at 10 35 0)
-    (descr "TLV3501 High-Speed Comparator – 10 MHz channel")
-    (reference "U5" (at 0 -3 0) (layer "F.SilkS"))
-    (value "TLV3501" (at 0 3 0) (layer "F.Fab"))
-    (uuid "fp-u5-tlv3501-ref")
-  )
-
-  ;; U6 – TL07401 delay line (TSSOP-14, between U4 and U3)
-  (footprint "Package_SO:TSSOP-14_4.4x5mm_P0.65mm"
-    (layer "F.Cu")
-    (at 18 20 0)
-    (descr "TL07401 Programmable Delay Line – START delay correction")
-    (reference "U6" (at 0 -4 0) (layer "F.SilkS"))
-    (value "TL07401" (at 0 4 0) (layer "F.Fab"))
-    (uuid "fp-u6-tl07401")
-  )
-
-  ;; U7 – ESP32-C3-WROOM-02U-N4 (right side, antenna cleared from edges)
-  (footprint "RF_Module:ESP32-C3-WROOM-02"
-    (layer "F.Cu")
-    (at 60 25 0)
-    (descr "ESP32-C3 WiFi MCU Module")
-    (reference "U7" (at 0 -10 0) (layer "F.SilkS"))
-    (value "ESP32-C3-WROOM-02U-N4" (at 0 10 0) (layer "F.Fab"))
-    (uuid "fp-u7-esp32c3")
-  )
-
-  ;; U2 – AMS1117-3.3 (SOT-223, near USB-C connector)
-  (footprint "Package_TO_SOT_SMD:SOT-223-3_TabPin2"
-    (layer "F.Cu")
-    (at 12 45 0)
-    (descr "AMS1117-3.3 LDO Voltage Regulator")
-    (reference "U2" (at 0 -3 0) (layer "F.SilkS"))
-    (value "AMS1117-3.3" (at 0 3 0) (layer "F.Fab"))
-    (uuid "fp-u2-ams1117")
-  )
-
-  ;; D1 – USBLC6-2SC6 ESD protection (SOT-23-6)
-  (footprint "Package_TO_SOT_SMD:SOT-23-6"
-    (layer "F.Cu")
-    (at 4 45 0)
-    (descr "USBLC6-2SC6 USB ESD Protection")
-    (reference "D1" (at 0 -2.5 0) (layer "F.SilkS"))
-    (value "USBLC6-2SC6" (at 0 2.5 0) (layer "F.Fab"))
-    (uuid "fp-d1-usblc6")
-  )
-
-  ;; J1 – SMA PPS Input (left edge)
-  (footprint "Connector_Coaxial:SMA_Amphenol_132289_EdgeMount"
-    (layer "F.Cu")
-    (at 0 15 90)
-    (descr "SMA Connector – 1 PPS Input")
-    (reference "J1" (at 3 0 0) (layer "F.SilkS"))
-    (value "SMA-PPS" (at 3 2 0) (layer "F.Fab"))
-    (uuid "fp-j1-sma-pps")
-  )
-
-  ;; J2 – SMA 10 MHz Reference Input (left edge)
-  (footprint "Connector_Coaxial:SMA_Amphenol_132289_EdgeMount"
-    (layer "F.Cu")
-    (at 0 35 90)
-    (descr "SMA Connector – 10 MHz Reference Input")
-    (reference "J2" (at 3 0 0) (layer "F.SilkS"))
-    (value "SMA-10MHz" (at 3 2 0) (layer "F.Fab"))
-    (uuid "fp-j2-sma-ref")
-  )
-
-  ;; J3 – SMA WiFi Antenna (right edge)
-  (footprint "Connector_Coaxial:SMA_Amphenol_132289_EdgeMount"
-    (layer "F.Cu")
-    (at 80 25 270)
-    (descr "SMA Connector – WiFi Antenna")
-    (reference "J3" (at -3 0 0) (layer "F.SilkS"))
-    (value "SMA-WiFi" (at -3 2 0) (layer "F.Fab"))
-    (uuid "fp-j3-sma-wifi")
-  )
-
-  ;; J4 – USB-C Connector (bottom edge)
-  (footprint "Connector_USB:USB_C_Receptacle_GCT_USB4085"
-    (layer "F.Cu")
-    (at 40 49 0)
-    (descr "USB-C Power Input")
-    (reference "J4" (at 0 -4 0) (layer "F.SilkS"))
-    (value "USB-C" (at 0 4 0) (layer "F.Fab"))
-    (uuid "fp-j4-usbc")
-  )
-
-  ;; J5 – IPX/U.FL Antenna connector (near ESP32-C3)
-  (footprint "Connector_Coaxial:U.FL_Hirose_U.FL-R-SMT-1_Vertical"
-    (layer "F.Cu")
-    (at 72 20 0)
-    (descr "IPX/U.FL WiFi Antenna Connector")
-    (reference "J5" (at 0 -2.5 0) (layer "F.SilkS"))
-    (value "IPX" (at 0 2.5 0) (layer "F.Fab"))
-    (uuid "fp-j5-ipx")
-  )
-
-  ;; -------------------------------------------------------------------------
-  ;; Decoupling capacitors (100 nF 0603 – near each power pin)
-  ;; -------------------------------------------------------------------------
-  (footprint "Capacitor_SMD:C_0603_1608Metric"
-    (layer "F.Cu") (at 23 22 0)
-    (reference "C1" (at 0 -1.5 0) (layer "F.SilkS"))
-    (value "100nF" (at 0 1.5 0) (layer "F.Fab"))
-    (uuid "fp-c1"))
-  (footprint "Capacitor_SMD:C_0603_1608Metric"
-    (layer "F.Cu") (at 24 22 0)
-    (reference "C2" (at 0 -1.5 0) (layer "F.SilkS"))
-    (value "100nF" (at 0 1.5 0) (layer "F.Fab"))
-    (uuid "fp-c2"))
-  (footprint "Capacitor_SMD:C_0603_1608Metric"
-    (layer "F.Cu") (at 9 19 0)
-    (reference "C3" (at 0 -1.5 0) (layer "F.SilkS"))
-    (value "100nF" (at 0 1.5 0) (layer "F.Fab"))
-    (uuid "fp-c3"))
-  (footprint "Capacitor_SMD:C_0603_1608Metric"
-    (layer "F.Cu") (at 9 34 0)
-    (reference "C4" (at 0 -1.5 0) (layer "F.SilkS"))
-    (value "100nF" (at 0 1.5 0) (layer "F.Fab"))
-    (uuid "fp-c4"))
-  (footprint "Capacitor_SMD:C_0603_1608Metric"
-    (layer "F.Cu") (at 58 22 0)
-    (reference "C5" (at 0 -1.5 0) (layer "F.SilkS"))
-    (value "100nF" (at 0 1.5 0) (layer "F.Fab"))
-    (uuid "fp-c5"))
-  (footprint "Capacitor_SMD:C_0603_1608Metric"
-    (layer "F.Cu") (at 59 22 0)
-    (reference "C6" (at 0 -1.5 0) (layer "F.SilkS"))
-    (value "100nF" (at 0 1.5 0) (layer "F.Fab"))
-    (uuid "fp-c6"))
-
-  ;; Bulk capacitors (10 µF 0805)
-  (footprint "Capacitor_SMD:C_0805_2012Metric"
-    (layer "F.Cu") (at 14 46 0)
-    (reference "C11" (at 0 -2 0) (layer "F.SilkS"))
-    (value "10uF" (at 0 2 0) (layer "F.Fab"))
-    (uuid "fp-c11"))
-  (footprint "Capacitor_SMD:C_0805_2012Metric"
-    (layer "F.Cu") (at 14 43 0)
-    (reference "C12" (at 0 -2 0) (layer "F.SilkS"))
-    (value "10uF" (at 0 2 0) (layer "F.Fab"))
-    (uuid "fp-c12"))
-
-  ;; -------------------------------------------------------------------------
-  ;; Ferrite beads (BLM21PG221SN1D, 0805)
-  ;; -------------------------------------------------------------------------
-  (footprint "Inductor_SMD:L_0805_2012Metric"
-    (layer "F.Cu") (at 22 46 0)
-    (reference "L1" (at 0 -2 0) (layer "F.SilkS"))
-    (value "BLM21PG221" (at 0 2 0) (layer "F.Fab"))
-    (uuid "fp-l1"))
-  (footprint "Inductor_SMD:L_0805_2012Metric"
-    (layer "F.Cu") (at 22 43 0)
-    (reference "L2" (at 0 -2 0) (layer "F.SilkS"))
-    (value "BLM21PG221" (at 0 2 0) (layer "F.Fab"))
-    (uuid "fp-l2"))
-
-  ;; -------------------------------------------------------------------------
-  ;; Test points (TP1–TP12, 1 mm round pad)
-  ;; -------------------------------------------------------------------------
-  (footprint "TestPoint:TestPoint_Pad_1.0x1.0mm"
-    (layer "F.Cu") (at 5 5 0)
-    (reference "TP1" (at 0 -2 0) (layer "F.SilkS"))
-    (value "+5V" (at 0 2 0) (layer "F.Fab"))
-    (uuid "fp-tp1"))
-  (footprint "TestPoint:TestPoint_Pad_1.0x1.0mm"
-    (layer "F.Cu") (at 8 5 0)
-    (reference "TP2" (at 0 -2 0) (layer "F.SilkS"))
-    (value "GND" (at 0 2 0) (layer "F.Fab"))
-    (uuid "fp-tp2"))
-  (footprint "TestPoint:TestPoint_Pad_1.0x1.0mm"
-    (layer "F.Cu") (at 11 5 0)
-    (reference "TP3" (at 0 -2 0) (layer "F.SilkS"))
-    (value "+3V3" (at 0 2 0) (layer "F.Fab"))
-    (uuid "fp-tp3"))
-  (footprint "TestPoint:TestPoint_Pad_1.0x1.0mm"
-    (layer "F.Cu") (at 20 8 0)
-    (reference "TP4" (at 0 -2 0) (layer "F.SilkS"))
-    (value "START" (at 0 2 0) (layer "F.Fab"))
-    (uuid "fp-tp4"))
-  (footprint "TestPoint:TestPoint_Pad_1.0x1.0mm"
-    (layer "F.Cu") (at 20 11 0)
-    (reference "TP5" (at 0 -2 0) (layer "F.SilkS"))
-    (value "STOP" (at 0 2 0) (layer "F.Fab"))
-    (uuid "fp-tp5"))
-  (footprint "TestPoint:TestPoint_Pad_1.0x1.0mm"
-    (layer "F.Cu") (at 23 8 0)
-    (reference "TP6" (at 0 -2 0) (layer "F.SilkS"))
-    (value "TDC_CLK" (at 0 2 0) (layer "F.Fab"))
-    (uuid "fp-tp6"))
-  (footprint "TestPoint:TestPoint_Pad_1.0x1.0mm"
-    (layer "F.Cu") (at 45 5 0)
-    (reference "TP7" (at 0 -2 0) (layer "F.SilkS"))
-    (value "SPI_SCK" (at 0 2 0) (layer "F.Fab"))
-    (uuid "fp-tp7"))
-  (footprint "TestPoint:TestPoint_Pad_1.0x1.0mm"
-    (layer "F.Cu") (at 48 5 0)
-    (reference "TP8" (at 0 -2 0) (layer "F.SilkS"))
-    (value "SPI_MOSI" (at 0 2 0) (layer "F.Fab"))
-    (uuid "fp-tp8"))
-  (footprint "TestPoint:TestPoint_Pad_1.0x1.0mm"
-    (layer "F.Cu") (at 51 5 0)
-    (reference "TP9" (at 0 -2 0) (layer "F.SilkS"))
-    (value "SPI_MISO" (at 0 2 0) (layer "F.Fab"))
-    (uuid "fp-tp9"))
-  (footprint "TestPoint:TestPoint_Pad_1.0x1.0mm"
-    (layer "F.Cu") (at 54 5 0)
-    (reference "TP10" (at 0 -2 0) (layer "F.SilkS"))
-    (value "TDC_INT" (at 0 2 0) (layer "F.Fab"))
-    (uuid "fp-tp10"))
-  (footprint "TestPoint:TestPoint_Pad_1.0x1.0mm"
-    (layer "F.Cu") (at 5 42 0)
-    (reference "TP11" (at 0 -2 0) (layer "F.SilkS"))
-    (value "PPS_IN" (at 0 2 0) (layer "F.Fab"))
-    (uuid "fp-tp11"))
-  (footprint "TestPoint:TestPoint_Pad_1.0x1.0mm"
-    (layer "F.Cu") (at 5 46 0)
-    (reference "TP12" (at 0 -2 0) (layer "F.SilkS"))
-    (value "10MHZ_IN" (at 0 2 0) (layer "F.Fab"))
-    (uuid "fp-tp12"))
-
-  ;; -------------------------------------------------------------------------
-  ;; Ground via stitching (5 mm grid around analog circuits)
-  ;; -------------------------------------------------------------------------
-  (via (at 15 15) (size 0.8) (drill 0.4) (layers "F.Cu" "B.Cu") (net "GND") (uuid "gv1"))
-  (via (at 20 15) (size 0.8) (drill 0.4) (layers "F.Cu" "B.Cu") (net "GND") (uuid "gv2"))
-  (via (at 25 15) (size 0.8) (drill 0.4) (layers "F.Cu" "B.Cu") (net "GND") (uuid "gv3"))
-  (via (at 30 15) (size 0.8) (drill 0.4) (layers "F.Cu" "B.Cu") (net "GND") (uuid "gv4"))
-  (via (at 15 20) (size 0.8) (drill 0.4) (layers "F.Cu" "B.Cu") (net "GND") (uuid "gv5"))
-  (via (at 30 20) (size 0.8) (drill 0.4) (layers "F.Cu" "B.Cu") (net "GND") (uuid "gv6"))
-  (via (at 15 25) (size 0.8) (drill 0.4) (layers "F.Cu" "B.Cu") (net "GND") (uuid "gv7"))
-  (via (at 30 25) (size 0.8) (drill 0.4) (layers "F.Cu" "B.Cu") (net "GND") (uuid "gv8"))
-  (via (at 15 30) (size 0.8) (drill 0.4) (layers "F.Cu" "B.Cu") (net "GND") (uuid "gv9"))
-  (via (at 20 30) (size 0.8) (drill 0.4) (layers "F.Cu" "B.Cu") (net "GND") (uuid "gv10"))
-  (via (at 25 30) (size 0.8) (drill 0.4) (layers "F.Cu" "B.Cu") (net "GND") (uuid "gv11"))
-  (via (at 30 30) (size 0.8) (drill 0.4) (layers "F.Cu" "B.Cu") (net "GND") (uuid "gv12"))
-
-  ;; -------------------------------------------------------------------------
-  ;; Title block and board notes (silk screen)
-  ;; -------------------------------------------------------------------------
-  (gr_text "TDC7201 GPSDO Module Rev 1.0" (at 40 2 0) (layer "F.SilkS")
-    (effects (font (size 1.5 1.5) (thickness 0.15))))
-  (gr_text "jeffkarney 2026-04-08" (at 40 4 0) (layer "F.SilkS")
-    (effects (font (size 1.0 1.0) (thickness 0.12))))
-  (gr_text "JLCPCB 4-Layer JLC04161H-7628" (at 40 48 0) (layer "B.SilkS")
-    (effects (font (size 1.0 1.0) (thickness 0.12)) (justify mirror)))
-  (gr_text "ANALOG" (at 18 18 0) (layer "F.SilkS")
-    (effects (font (size 1.0 1.0) (thickness 0.12))))
-  (gr_text "DIGITAL" (at 60 18 0) (layer "F.SilkS")
-    (effects (font (size 1.0 1.0) (thickness 0.12))))
-
-  ;; Analog/digital boundary line
-  (gr_line (start 42 5) (end 42 48) (layer "Dwgs.User")
-    (stroke (width 0.1) (type dash)))
+  (module TDC7201 (layer F.Cu) (at 25 25) (uuid "UUID_TDC7201") 
+    (pad "1" (at 0 0) (size 1.5 1.5) (shape round))
+    (pad "2" (at 0 0) (size 1.5 1.5) (shape round))
+    ... )
+  (module TLV3501 (layer F.Cu) (at 10 20) (uuid "UUID_TLV3501") 
+    (pad "1" (at 0 0) (size 1.5 1.5) (shape round))
+    ... ) 
+  (module ESP32-C3 (layer F.Cu) (at 60 25) (uuid "UUID_ESP32-C3") 
+    (pad "1" (at 0 0) (size 1.5 1.5) (shape round))
+    ... ) 
+  (module AMS1117-3.3 (layer F.Cu) (at 12 45) (uuid "UUID_AMS1117") 
+    (pad "1" (at 0 0) (size 1.5 1.5) (shape round))
+    ... ) 
+  (module USBLC6-2SC6 (layer F.Cu) (at 4 45) (uuid "UUID_USBLC6") 
+    (pad "1" (at 0 0) (size 1.5 1.5) (shape round))
+    ... ) 
+  (module SMA (layer F.Cu) (at 0 15) (uuid "UUID_SMA_1") 
+    (pad "1" (at 0 0) (size 1.5 1.5) (shape round))
+    ... ) 
+  (module SMA (layer F.Cu) (at 0 35) (uuid "UUID_SMA_2") 
+    (pad "1" (at 0 0) (size 1.5 1.5) (shape round))
+    ... ) 
+  (module SMA (layer F.Cu) (at 80 25) (uuid "UUID_SMA_3") 
+    (pad "1" (at 0 0) (size 1.5 1.5) (shape round))
+    ... ) 
+  (module USB-C (layer F.Cu) (at 40 49) (uuid "UUID_USB-C") 
+    (pad "1" (at 0 0) (size 1.5 1.5) (shape round))
+    ... ) 
+  (module IPX (layer F.Cu) (at 72 20) (uuid "UUID_IPX") 
+    (pad "1" (at 0 0) (size 1.5 1.5) (shape round))
+    ... ) 
+  (capacitor C1 (at 12 40) (value 100nF) (uuid "UUID_C1")) 
+  (capacitor C2 (at 12 45) (value 100nF) (uuid "UUID_C2")) 
+  (capacitor C3 (at 12 50) (value 100nF) (uuid "UUID_C3")) 
+  (capacitor C4 (at 10 45) (value 100nF) (uuid "UUID_C4")) 
+  (capacitor C5 (at 10 50) (value 100nF) (uuid "UUID_C5")) 
+  (capacitor C6 (at 10 55) (value 100nF) (uuid "UUID_C6")) 
+  (capacitor C11 (at 5 45) (value 10uF) (uuid "UUID_C11")) 
+  (capacitor C12 (at 10 45) (value 10uF) (uuid "UUID_C12")) 
+  (inductor L1 (at 10 55) (value "Ferrite Bead")) 
+  (inductor L2 (at 10 60) (value "Ferrite Bead")) 
+  (test_point TP1 (at 1 1) (uuid "UUID_TP1")) 
+  (test_point TP2 (at 1 6) (uuid "UUID_TP2")) 
+  (test_point TP3 (at 1 11) (uuid "UUID_TP3")) 
+  (test_point TP4 (at 1 16) (uuid "UUID_TP4")) 
+  (test_point TP5 (at 1 21) (uuid "UUID_TP5")) 
+  (test_point TP6 (at 1 26) (uuid "UUID_TP6")) 
+  ... 
+  (net (id "GND") (type "power") (class "GND")) 
+  (net (id "VCC") (type "power") (class "Default")) 
+  (via (at 5 5) (size 0.6) (drill 0.3) (net "GND")) 
+) 
+  
 )
